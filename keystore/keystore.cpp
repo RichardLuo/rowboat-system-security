@@ -1336,26 +1336,26 @@ static struct action {
     uint32_t perm;
     int lengths[MAX_PARAM];
 } actions[] = {
-    {test,       CommandCodes[TEST],       STATE_ANY,      P_TEST,     {0, 0, 0}},
-    {get,        CommandCodes[GET],        STATE_NO_ERROR, P_GET,      {KEY_SIZE, 0, 0}},
-    {insert,     CommandCodes[INSERT],     STATE_NO_ERROR, P_INSERT,   {KEY_SIZE, VALUE_SIZE, 0}},
-    {del,        CommandCodes[DELETE],     STATE_ANY,      P_DELETE,   {KEY_SIZE, 0, 0}},
-    {exist,      CommandCodes[EXIST],      STATE_ANY,      P_EXIST,    {KEY_SIZE, 0, 0}},
-    {saw,        CommandCodes[SAW],        STATE_ANY,      P_SAW,      {KEY_SIZE, 0, 0}},
-    {reset,      CommandCodes[RESET],      STATE_ANY,      P_RESET,    {0, 0, 0}},
-    {password,   CommandCodes[PASSWORD],   STATE_ANY,      P_PASSWORD, {PASSWORD_SIZE, 0, 0}},
-    {lock,       CommandCodes[LOCK],       STATE_NO_ERROR, P_LOCK,     {0, 0, 0}},
-    {unlock,     CommandCodes[UNLOCK],     STATE_LOCKED,   P_UNLOCK,   {PASSWORD_SIZE, 0, 0}},
-    {zero,       CommandCodes[ZERO],       STATE_ANY,      P_ZERO,     {0, 0, 0}},
-    {generate,   CommandCodes[GENERATE],   STATE_NO_ERROR, P_INSERT,   {KEY_SIZE, 0, 0}},
-    {import,     CommandCodes[IMPORT],     STATE_NO_ERROR, P_INSERT,   {KEY_SIZE, VALUE_SIZE, 0}},
-    {sign,       CommandCodes[SIGN],       STATE_NO_ERROR, P_SIGN,     {KEY_SIZE, VALUE_SIZE, 0}},
-    {verify,     CommandCodes[VERIFY],     STATE_NO_ERROR, P_VERIFY,   {KEY_SIZE, VALUE_SIZE, VALUE_SIZE}},
-    {get_pubkey, CommandCodes[GET_PUBKEY], STATE_NO_ERROR, P_GET,      {KEY_SIZE, 0, 0}},
-    {del_key,    CommandCodes[DEL_KEY],    STATE_ANY,      P_DELETE,   {KEY_SIZE, 0, 0}},
-    {grant,      CommandCodes[GRANT],      STATE_NO_ERROR, P_GRANT,    {KEY_SIZE, KEY_SIZE, 0}},
-    {ungrant,    CommandCodes[UNGRANT],    STATE_NO_ERROR, P_GRANT,    {KEY_SIZE, KEY_SIZE, 0}},
-    {getmtime,   CommandCodes[GETMTIME],   STATE_ANY,      P_SAW,      {KEY_SIZE, 0, 0}},
+    {test,       (int8_t)CommandCodes[TEST],       STATE_ANY,      P_TEST,     {0, 0, 0}},
+    {get,        (int8_t)CommandCodes[GET],        STATE_NO_ERROR, P_GET,      {KEY_SIZE, 0, 0}},
+    {insert,     (int8_t)CommandCodes[INSERT],     STATE_NO_ERROR, P_INSERT,   {KEY_SIZE, VALUE_SIZE, 0}},
+    {del,        (int8_t)CommandCodes[DELETE],     STATE_ANY,      P_DELETE,   {KEY_SIZE, 0, 0}},
+    {exist,      (int8_t)CommandCodes[EXIST],      STATE_ANY,      P_EXIST,    {KEY_SIZE, 0, 0}},
+    {saw,        (int8_t)CommandCodes[SAW],        STATE_ANY,      P_SAW,      {KEY_SIZE, 0, 0}},
+    {reset,      (int8_t)CommandCodes[RESET],      STATE_ANY,      P_RESET,    {0, 0, 0}},
+    {password,   (int8_t)CommandCodes[PASSWORD],   STATE_ANY,      P_PASSWORD, {PASSWORD_SIZE, 0, 0}},
+    {lock,       (int8_t)CommandCodes[LOCK],       STATE_NO_ERROR, P_LOCK,     {0, 0, 0}},
+    {unlock,     (int8_t)CommandCodes[UNLOCK],     STATE_LOCKED,   P_UNLOCK,   {PASSWORD_SIZE, 0, 0}},
+    {zero,       (int8_t)CommandCodes[ZERO],       STATE_ANY,      P_ZERO,     {0, 0, 0}},
+    {generate,   (int8_t)CommandCodes[GENERATE],   STATE_NO_ERROR, P_INSERT,   {KEY_SIZE, 0, 0}},
+    {import,     (int8_t)CommandCodes[IMPORT],     STATE_NO_ERROR, P_INSERT,   {KEY_SIZE, VALUE_SIZE, 0}},
+    {sign,       (int8_t)CommandCodes[SIGN],       STATE_NO_ERROR, P_SIGN,     {KEY_SIZE, VALUE_SIZE, 0}},
+    {verify,     (int8_t)CommandCodes[VERIFY],     STATE_NO_ERROR, P_VERIFY,   {KEY_SIZE, VALUE_SIZE, VALUE_SIZE}},
+    {get_pubkey, (int8_t)CommandCodes[GET_PUBKEY], STATE_NO_ERROR, P_GET,      {KEY_SIZE, 0, 0}},
+    {del_key,    (int8_t)CommandCodes[DEL_KEY],    STATE_ANY,      P_DELETE,   {KEY_SIZE, 0, 0}},
+    {grant,      (int8_t)CommandCodes[GRANT],      STATE_NO_ERROR, P_GRANT,    {KEY_SIZE, KEY_SIZE, 0}},
+    {ungrant,    (int8_t)CommandCodes[UNGRANT],    STATE_NO_ERROR, P_GRANT,    {KEY_SIZE, KEY_SIZE, 0}},
+    {getmtime,   (int8_t)CommandCodes[GETMTIME],   STATE_ANY,      P_SAW,      {KEY_SIZE, 0, 0}},
     {NULL,       0,                        STATE_ANY,      0,          {0, 0, 0}},
 };
 
@@ -1364,11 +1364,11 @@ static struct user {
     uid_t euid;
     uint32_t perms;
 } users[] = {
-    {AID_SYSTEM,   ~0,         ~0},
+    {AID_SYSTEM,   (uid_t)~0,         (uint32_t)~0},
     {AID_VPN,      AID_SYSTEM, P_GET | P_SIGN | P_VERIFY },
     {AID_WIFI,     AID_SYSTEM, P_GET | P_SIGN | P_VERIFY },
     {AID_ROOT,     AID_SYSTEM, P_GET},
-    {~0,           ~0,         P_TEST | P_GET | P_INSERT | P_DELETE | P_EXIST | P_SAW |
+    {(uid_t)~0,    (uid_t)~0, P_TEST | P_GET | P_INSERT | P_DELETE | P_EXIST | P_SAW |
                                P_SIGN | P_VERIFY},
 };
 
